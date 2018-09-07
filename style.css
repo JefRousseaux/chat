@@ -1,0 +1,18 @@
+.nom
+{
+	font-family:fantasy;
+	text-decoration: underline;
+
+}
+.position_formulaire
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+.position_chat
+{
+	position: absolute;
+	top: 45%;
+	left: 20%;
+}
