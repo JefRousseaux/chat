@@ -1,0 +1,32 @@
+<?php
+// Connexion à la base de données
+$longueur_pseudo=0;
+$longueur_message=0;
+session_start();
+$_SESSION['pseudosession']=$_POST['pseudo'];
+$longueur_pseudo=strlen($_POST['pseudo']);
+$longueur_message=strlen($_POST['message']);
+     if($longueur_pseudo<25 AND $longueur_message<100)
+     {
+try
+{
+	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+}
+catch(Exception $e)
+{
+        die('Erreur : '.$e->getMessage());
+}
+
+// Insertion du message à l'aide d'une requête préparée
+$req = $bdd->prepare('INSERT INTO minichat (pseudo, message, date_message) VALUES(?, ?, NOW())');
+$req->execute(array($_POST['pseudo'], $_POST['message']));
+
+// Redirection du visiteur vers la page du minichat
+header('Location: minichat.php');
+}
+else
+{
+	echo "Longueur du pseudo ou du message trop long!";
+}
+
+?>
